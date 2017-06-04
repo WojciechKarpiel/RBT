@@ -1,10 +1,20 @@
-module Set (Set,
-            Set.null,
+{-|
+Module      : RBT
+Description : RBT data struct implementation
+Copyright   : Bartosz Walkowicz, Michał Kawałek (c) 2017
+License     : BSD 3-clause
+Maintainer  : wallko1@hotmail.com
+Stability   : experimental
+
+Implementation of RBT data struct
+-}
+module RBT (RBTree,
+            RBT.null,
             empty,
             singleton,
             root,
-            Set.min,
-            Set.max,
+            RBT.min,
+            RBT.max,
             search,
             insert,
             remove,
@@ -31,40 +41,44 @@ instance F.Foldable RBTree where
     foldMap f (Node _ x left right) = foldMap f left `mappend` f x `mappend` foldMap f right
 
 
-type Set = RBTree
-
-
-null :: Set a -> Bool
+-- | Time complexity: O(1)
+null :: RBTree a -> Bool
 null Empty = True
 null _     = False
 
 
-empty :: Set a
+-- | Time complexity: O(1)
+empty :: RBTree a
 empty = Empty
 
 
-singleton :: a -> Set a
+-- | Time complexity: O(1)
+singleton :: a -> RBTree a
 singleton x = Node Black x Empty Empty
 
 
-root :: Set a -> Maybe a
+-- | Time complexity: O(1)
+root :: RBTree a -> Maybe a
 root Empty          = Nothing
 root (Node _ x _ _) = Just x
 
 
-min :: Set a -> Maybe a
+-- | Time complexity: O(log n)
+min :: RBTree a -> Maybe a
 min Empty              = Nothing
 min (Node _ x Empty _) = Just x
-min (Node _ _ left _)  = Set.min left
+min (Node _ _ left _)  = RBT.min left
 
 
-max :: Set a -> Maybe a
+-- | Time complexity: O(log n)
+max :: RBTree a -> Maybe a
 max Empty              = Nothing
 max (Node _ x _ Empty) = Just x
-max (Node _ _ _ right) = Set.max right
+max (Node _ _ _ right) = RBT.max right
 
 
-search :: (Ord a) => a -> Set a -> Maybe a
+-- | Time complexity: O(log n)
+search :: (Ord a) => a -> RBTree a -> Maybe a
 search x Empty = Nothing
 search x (Node _ y left right)
     | x == y    = Just y
@@ -72,13 +86,15 @@ search x (Node _ y left right)
     | otherwise = search x right
 
 
-member :: (Ord a) => a -> Set a -> Bool
+-- | Time complexity: O(log n)
+member :: (Ord a) => a -> RBTree a -> Bool
 member a s = case search a s of
                  Nothing -> False
                  _       -> True
 
 
-insert :: Ord a => a -> Set a -> Set a
+-- | Time complexity: O(log n)
+insert :: Ord a => a -> RBTree a -> RBTree a
 insert a t = let (Node _ b l r) = _insert a t in Node Black b l r
     where _insert x Empty = Node Red x Empty Empty
           _insert x t@(Node Black y left right)
@@ -91,7 +107,7 @@ insert a t = let (Node _ b l r) = _insert a t in Node Black b l r
               | otherwise = Node Red y (_insert x left) right
 
 
-balance :: a -> Set a -> Set a -> Set a
+balance :: a -> RBTree a -> RBTree a -> RBTree a
 balance a (Node Red b bl@(Node Red x xl xr) br) (Node Red c cl cr) = Node Red a (Node Black b bl br) (Node Black c cl cr)
 balance a (Node Red b bl br@(Node Red x xl xr)) (Node Red c cl cr) = Node Red a (Node Black b bl br) (Node Black c cl cr)
 balance a (Node Red b bl br) (Node Red c cl@(Node Red x xl xr) cr) = Node Red a (Node Black b bl br) (Node Black c cl cr)
@@ -107,13 +123,16 @@ balance a l r = Node Black a l r
 
 
 -- TODO implement
-remove :: Ord a => a -> Set a -> Set a
+-- | Time complexity: O(log n)
+remove :: Ord a => a -> RBTree a -> RBTree a
 remove x s = s
 
 
-fromList :: Ord a => [a] -> Set a
+-- | Time complexity: O(n(log n))
+fromList :: Ord a => [a] -> RBTree a
 fromList = foldr insert empty
 
 
-toList :: Set a -> [a]
+-- | Time complexity: O(n)
+toList :: RBTree a -> [a]
 toList = F.foldr (:) []
