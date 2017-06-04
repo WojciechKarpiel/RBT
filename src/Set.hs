@@ -1,24 +1,67 @@
-module RBT (isEmpty,
+module Set (Set,
+            Set.null,
+            empty,
             singleton,
-            insert) where
+            root,
+            Set.min,
+            Set.max,
+            search,
+            insert,
+            remove,
+            fromList,
+            toList) where
 
 import qualified Data.Foldable as F
 import qualified Data.Traversable as T
 
 
-data Color = Red | Black deriving Show
-data RBTree a = Empty | Node Color a (RBTree a) (RBTree a) deriving Show
+data Color = Red | Black deriving (Show, Eq)
+data RBTree a = Empty | Node Color a (RBTree a) (RBTree a) deriving (Eq, Show)
+
+--instance Show a => Show (RBTree a) where
+--    show = show . toList
+
+instance Functor RBTree where
+    fmap _ Empty = Empty
+    fmap f (Node col x left right) = Node col (f x) (fmap f left) (fmap f right)
+
+
+instance F.Foldable RBTree where
+    foldMap _ Empty = mempty
+    foldMap f (Node _ x left right) = foldMap f left `mappend` f x `mappend` foldMap f right
+
 
 type Set = RBTree
 
 
-isEmpty :: Set a -> Bool
-isEmpty Empty = True
-isEmpty _     = False
+null :: Set a -> Bool
+null Empty = True
+null _     = False
+
+
+empty :: Set a
+empty = Empty
 
 
 singleton :: a -> Set a
 singleton x = Node Black x Empty Empty
+
+
+root :: Set a -> Maybe a
+root Empty          = Nothing
+root (Node _ x _ _) = Just x
+
+
+min :: Set a -> Maybe a
+min Empty              = Nothing
+min (Node _ x Empty _) = Just x
+min (Node _ _ left _)  = Set.min left
+
+
+max :: Set a -> Maybe a
+max Empty              = Nothing
+max (Node _ x _ Empty) = Just x
+max (Node _ _ _ right) = Set.max right
 
 
 search :: (Ord a) => a -> Set a -> Maybe a
@@ -68,55 +111,9 @@ remove :: Ord a => a -> Set a -> Set a
 remove x s = s
 
 
-instance Functor RBTree where
-    fmap _ Empty = Empty
-    fmap f (Node col x left right) = Node col (f x) (fmap f left) (fmap f right)
+fromList :: Ord a => [a] -> Set a
+fromList = foldr insert empty
 
 
-instance F.Foldable RBTree where
-    foldMap _ Empty = mempty
-    foldMap f (Node _ x left right) = foldMap f left `mappend` f x `mappend` foldMap f right
-
-
-
-newtype Pair a b = Pair (a, b) deriving Show
-
-instance Eq a => Eq (Pair a b) where
-    Pair (a, b) == Pair (c, d) = a == c
-
-instance Ord a => Ord (Pair a b) where
-    Pair (a, b) <= Pair (c, d) = a <= c
-
-
-newtype Map a b = Map (Set (Pair a b)) deriving Show
-
-
-isEmpty' :: Map a b -> Bool
-isEmpty' (Map Empty) = True
-isEmpty' _             = False
-
-
-empty :: Map a b
-empty = Map Empty
-
-
-get :: Ord a => a -> Map a b -> Maybe b
-get x (Map Empty) = Nothing
-get x (Map t@(Node _ (Pair (_, z)) _ _)) = search (Pair (x, z)) t >>= \(Pair (_, a)) -> Just a
-
-
-put :: Ord a => a -> b -> Map a b -> Map a b
-put k v (Map t) = Map $ insert (Pair (k, v)) t
-
-
-delete :: Ord a => a -> Map a b -> Map a b
-delete _ m@(Map Empty) = m
-delete x (Map t@(Node _ (Pair (_, z)) _ _)) = Map $ remove (Pair (x, z)) t
-
-
-fromList :: Ord a => [(a, b)] -> Map a b
-fromList = foldl (\acc (a, b) -> put a b acc) empty
-
-
-toList :: Map a b -> [(a, b)]
-toList (Map t) = F.foldr (\(Pair (a, b)) acc -> (a, b):acc) [] t
+toList :: Set a -> [a]
+toList = F.foldr (:) []
