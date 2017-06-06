@@ -1,6 +1,7 @@
 module Main where
 
-import Lib
+import RBT
+import Map
 
 main :: IO ()
-main = someFunc
+main = putStrLn "Hejka ;p"
