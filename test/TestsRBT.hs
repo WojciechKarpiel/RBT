@@ -65,8 +65,8 @@ testFromList =
 
 
 
-runTests :: IO Counts
-runTests = runTestTT $ TestList [
+runHunitTests :: IO Counts
+runHunitTests = runTestTT $ TestList [
                             testNullForEmptyNode,
                             testNullForSingleton,
                             testIsBlackForRoot,
