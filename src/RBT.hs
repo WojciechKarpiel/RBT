@@ -93,6 +93,18 @@ member a s = case search a s of
                  _       -> True
 
 
+-- | Time complexity: O(1)
+isRed :: RBTree a -> Bool
+isRed Empty              = False
+isRed (Node Black _ _ _) = False
+isRed _                  = True
+
+
+-- | Time complexity: O(1)
+isBlack :: RBTree a -> Bool
+isBlack = not . isRed
+
+
 -- | Time complexity: O(log n)
 insert :: Ord a => a -> RBTree a -> RBTree a
 insert a t = let (Node _ b l r) = _insert a t in Node Black b l r
@@ -108,10 +120,8 @@ insert a t = let (Node _ b l r) = _insert a t in Node Black b l r
 
 
 balance :: a -> RBTree a -> RBTree a -> RBTree a
-balance a (Node Red b bl@(Node Red x xl xr) br) (Node Red c cl cr) = Node Red a (Node Black b bl br) (Node Black c cl cr)
-balance a (Node Red b bl br@(Node Red x xl xr)) (Node Red c cl cr) = Node Red a (Node Black b bl br) (Node Black c cl cr)
-balance a (Node Red b bl br) (Node Red c cl@(Node Red x xl xr) cr) = Node Red a (Node Black b bl br) (Node Black c cl cr)
-balance a (Node Red b bl br) (Node Red c cl cr@(Node Red x xl xr)) = Node Red a (Node Black b bl br) (Node Black c cl cr)
+balance a (Node Red b bl br) (Node Red c cl cr)
+    | isRed bl || isRed br || isRed cl || isRed cr = Node Red a (Node Black b bl br) (Node Black c cl cr)
 
 balance a (Node Red b bl (Node Red x xl xr)) ar = Node Black x (Node Red b bl xl) (Node Red a xr ar)
 balance a al (Node Red c (Node Red x xl xr) cr) = Node Black x (Node Red a al xl) (Node Red c xr cr)
@@ -122,10 +132,56 @@ balance a al (Node Red c cl cr@(Node Red x xl xr)) = Node Black c (Node Red a al
 balance a l r = Node Black a l r
 
 
--- TODO implement
 -- | Time complexity: O(log n)
 remove :: Ord a => a -> RBTree a -> RBTree a
-remove x s = s
+remove _ Empty = Empty
+remove x (Node Black y Empty Empty)
+    | x == y = Empty
+remove x t@(Node Black z zl zr) = let s = if (isBlack zl && isBlack zr)
+                                              then Node Red z zl zr
+                                              else t
+                                  in case _remove x s False of
+                                      ((Node _ y l r), _) -> Node Black y l r
+                                      (Empty, _)          -> Empty
+    where _remove a t@(Node Red b Empty Empty) d
+              | a == b || d = (Empty, b)
+              | otherwise   = (t, a)
+          _remove a t@(Node Black b (Node Red c Empty Empty) Empty) d
+              | a == b || d = (Node Black c Empty Empty, b)
+              | a == c      = (Node Black b Empty Empty, a)
+              | otherwise   = (t, a)
+          _remove a t@(Node _ b l r) d =
+              let (Node col v vl vr) = case a <= b of
+                                           True  -> pushRedToLeft t
+                                           False -> pushRedToRight t
+              in case a `compare` v of
+                  LT -> let (vl', val) = _remove a vl d    in (Node col v vl' vr, val)
+                  EQ -> let (vl', val) = _remove a vl True in (Node col val vl' vr, v)
+                  GT -> let (vr', val) = _remove a vr d    in (Node col v vl vr', val)
+
+
+pushRedToRight :: RBTree a -> RBTree a
+pushRedToRight (Node Red a (Node Black b bl br) (Node Black c cl cr))
+    | isBlack bl && isBlack br && isBlack cl && isBlack cr = Node Black a (Node Red b bl br) (Node Red c cl cr)
+pushRedToRight (Node Black a (Node Red b bl br) t@(Node Black c cl cr))
+    | isBlack cl && isBlack cr = Node Black b bl (Node Red a br t)
+pushRedToRight (Node Red a (Node Black b (Node Red d dl dr) br) (Node Black c cl cr))
+    | isBlack cl && isBlack cr = Node Red b (Node Black d dl dr) (Node Black a br (Node Red c cl cr))
+pushRedToRight (Node Red a (Node Black b bl (Node Red d dl dr)) (Node Black c cl cr))
+    | isBlack cl && isBlack cr = Node Red d (Node Black b bl dl) (Node Black a dr (Node Red c cl cr))
+pushRedToRight t = t
+
+
+pushRedToLeft :: RBTree a -> RBTree a
+pushRedToLeft (Node Red a (Node Black b bl br) (Node Black c cl cr))
+    | isBlack bl && isBlack br && isBlack cl && isBlack cr = Node Black a (Node Red b bl br) (Node Red c cl cr)
+pushRedToLeft (Node Black a t@(Node Black b bl br) (Node Red c cl cr))
+    | isBlack bl && isBlack br = Node Black c (Node Red a t cl) cr
+pushRedToLeft (Node Red a (Node Black b bl br) (Node Black c (Node Red d dl dr) cr))
+    | isBlack bl && isBlack br = Node Red d (Node Black a (Node Red b bl br) dl) (Node Black c dr cr)
+pushRedToLeft (Node Red a (Node Black b bl br) (Node Black c cl (Node Red d dl dr)))
+    | isBlack bl && isBlack br = Node Red c (Node Black a (Node Red b bl br) cl) (Node Black d dl dr)
+pushRedToLeft t = t
 
 
 -- | Time complexity: O(n(log n))
