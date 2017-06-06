@@ -1,0 +1,828 @@
+
+==================== FINAL INTERFACE ====================
+2017-06-06 20:58:27.815811 UTC
+
+interface librbt-0.1.0.0-1b5tNFuxx0AK0yhfPuFreI:RBT 8002
+  interface hash: 1ad7bd51c7a77938157b62a842465fbc
+  ABI hash: af4d104703bbb42e9f482736c38a730a
+  export-list hash: 44f619b67923ab5e8e4a25a195ddf990
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: f6624f22fcdd76ed0ac6625466e2d712
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  RBT.empty
+  RBT.fromList
+  RBT.insert
+  RBT.max
+  RBT.min
+  RBT.null
+  RBT.remove
+  RBT.root
+  RBT.search
+  RBT.singleton
+  RBT.toList
+  RBT.RBTree
+module dependencies:
+package dependencies: base-4.9.1.0* ghc-prim-0.5.0.0
+                      integer-gmp-1.0.0.1
+orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
+family instance modules: base-4.9.1.0:Control.Applicative
+                         base-4.9.1.0:Data.Either base-4.9.1.0:Data.Functor.Const
+                         base-4.9.1.0:Data.Monoid base-4.9.1.0:Data.Type.Equality
+                         base-4.9.1.0:GHC.Generics base-4.9.1.0:GHC.IO.Exception
+                         base-4.9.1.0:GHC.TypeLits
+import  -/  base-4.9.1.0:Data.Foldable 3e0b6967a1da89945d0e2d47266337a2
+import  -/  base-4.9.1.0:Data.Traversable 556020d7cf3c4a34a774600512918a37
+import  -/  base-4.9.1.0:GHC.Base c4231c43c07e46080a26bf94094c7aa1
+import  -/  base-4.9.1.0:GHC.Show a027f5ac24879eaba752f44aa90fe511
+import  -/  base-4.9.1.0:Prelude 22dd289b8469a8fa8dc81cab7b237771
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
+import  -/  ghc-prim-0.5.0.0:GHC.Types 89f8de4f08018c9177c98d979eae0e45
+94b97d557da590ac1de8252ea49eeedc
+  $fEqColor :: GHC.Classes.Eq RBT.Color
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ RBT.Color RBT.$fEqColor_$c== RBT.$fEqColor_$c/= -}
+94b97d557da590ac1de8252ea49eeedc
+  $fEqColor_$c/= :: RBT.Color -> RBT.Color -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: RBT.Color) (b :: RBT.Color) ->
+                 case a of wild {
+                   RBT.Red
+                   -> case b of wild1 {
+                        RBT.Red -> GHC.Types.False RBT.Black -> GHC.Types.True }
+                   RBT.Black
+                   -> case b of wild1 {
+                        RBT.Red -> GHC.Types.True RBT.Black -> GHC.Types.False } }) -}
+94b97d557da590ac1de8252ea49eeedc
+  $fEqColor_$c== :: RBT.Color -> RBT.Color -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ds :: RBT.Color) (ds1 :: RBT.Color) ->
+                 case ds of wild {
+                   RBT.Red
+                   -> case ds1 of wild1 {
+                        RBT.Red -> GHC.Types.True RBT.Black -> GHC.Types.False }
+                   RBT.Black
+                   -> case ds1 of wild1 {
+                        RBT.Red -> GHC.Types.False RBT.Black -> GHC.Types.True } }) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fEqRBTree :: GHC.Classes.Eq a => GHC.Classes.Eq (RBT.RBTree a)
+  DFunId
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(C(C1(U)),A)>m,
+     Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun: @ a ($dEq :: GHC.Classes.Eq a).
+                  @ (RBT.RBTree a)
+                  (RBT.$fEqRBTree_$c== @ a $dEq)
+                  (RBT.$fEqRBTree_$c/= @ a $dEq) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fEqRBTree_$c/= ::
+    GHC.Classes.Eq a => RBT.RBTree a -> RBT.RBTree a -> GHC.Types.Bool
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,U(C(C1(U)),A)><S,1*U><S,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   ($dEq :: GHC.Classes.Eq a)
+                   (a1 :: RBT.RBTree a)
+                   (b :: RBT.RBTree a) ->
+                 case RBT.$fEqRBTree_$c== @ a $dEq a1 b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fEqRBTree_$c== ::
+    GHC.Classes.Eq a => RBT.RBTree a -> RBT.RBTree a -> GHC.Types.Bool
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,U(C(C1(U)),A)><S,1*U><S,1*U> -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree :: Data.Foldable.Foldable RBT.RBTree
+  DFunId
+  {- Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ RBT.RBTree
+                  RBT.$fFoldableRBTree_$cfold
+                  RBT.$fFoldableRBTree_$cfoldMap
+                  RBT.$fFoldableRBTree_$cfoldr
+                  RBT.$fFoldableRBTree_$cfoldr'
+                  RBT.$fFoldableRBTree_$cfoldl
+                  RBT.$fFoldableRBTree_$cfoldl'
+                  RBT.$fFoldableRBTree_$cfoldr1
+                  RBT.$fFoldableRBTree_$cfoldl1
+                  RBT.$fFoldableRBTree_$ctoList
+                  RBT.$fFoldableRBTree_$cnull
+                  RBT.$fFoldableRBTree_$clength
+                  RBT.$fFoldableRBTree_$celem
+                  RBT.$fFoldableRBTree_$cmaximum
+                  RBT.$fFoldableRBTree_$cminimum
+                  RBT.$fFoldableRBTree_$csum
+                  RBT.$fFoldableRBTree_$cproduct -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree1 ::
+    GHC.Num.Num a => RBT.RBTree a -> Data.Monoid.Product a
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(A,A,U,A,A,A,C(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a ($dNum :: GHC.Num.Num a) ->
+                 RBT.$fFoldableRBTree_$cfoldMap
+                   @ (Data.Monoid.Product a)
+                   @ a
+                   (Data.Monoid.$fMonoidProduct @ a $dNum)
+                   (\ (tpl :: a) -> tpl)
+                     `cast`
+                   (<a>_R ->_R Sym (Data.Monoid.N:Product[0] <a>_R))) -}
+967426efcad25ab38df9644f1baa5b8f
+  $fFoldableRBTree10 ::
+    GHC.Base.Monoid (Data.Monoid.Dual (Data.Monoid.Endo b))
+  {- Unfolding: (\ @ b ->
+                 Data.Monoid.$fMonoidDual
+                   @ (Data.Monoid.Endo b)
+                   (Data.Monoid.$fMonoidEndo @ b)) -}
+e3aea1e2f4c83efaf9e0f79df840f47a
+  $fFoldableRBTree11 :: a
+  {- Strictness: x -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree2 ::
+    GHC.Num.Num a => RBT.RBTree a -> Data.Monoid.Sum a
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(U,A,A,A,A,A,C(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a ($dNum :: GHC.Num.Num a) ->
+                 RBT.$fFoldableRBTree_$cfoldMap
+                   @ (Data.Monoid.Sum a)
+                   @ a
+                   (Data.Monoid.$fMonoidSum @ a $dNum)
+                   (\ (tpl :: a) -> tpl)
+                     `cast`
+                   (<a>_R ->_R Sym (Data.Monoid.N:Sum[0] <a>_R))) -}
+ee398888809e2d808f399dc0057e0d4d
+  $fFoldableRBTree3 :: a
+  {- Strictness: x -}
+4a375658b5e8b8bd2003f891d5e993ed
+  $fFoldableRBTree4 :: a
+  {- Strictness: x -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree5 ::
+    GHC.Classes.Eq a => a -> RBT.RBTree a -> Data.Monoid.Any
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,1*U(1*C1(C(U)),A)><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a ($dEq :: GHC.Classes.Eq a) (eta :: a) ->
+                 RBT.$fFoldableRBTree_$cfoldMap
+                   @ Data.Monoid.Any
+                   @ a
+                   Data.Monoid.$fMonoidAny
+                   (GHC.Classes.== @ a $dEq eta)
+                     `cast`
+                   (<a>_R ->_R Sym (Data.Monoid.N:Any[0]))) -}
+70e6435ee4404c6cbcded4e07a3b555e
+  $fFoldableRBTree6 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+acc838760a996c1c8f975a58433b8c6f
+  $fFoldableRBTree7 ::
+    a
+    -> (GHC.Types.Int -> GHC.Types.Int)
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+  {- Arity: 3, HasNoCafRefs,
+     Unfolding: (\ @ a
+                   (x :: a)
+                   (k :: GHC.Types.Int -> GHC.Types.Int)
+                   (z :: GHC.Types.Int) ->
+                 case z of wild { GHC.Types.I# x1 ->
+                 k (GHC.Types.I# (GHC.Prim.+# x1 1#)) }) -}
+fd603056e0c3de961e786f452e1507bb
+  $fFoldableRBTree8 :: a -> GHC.Types.Bool -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,A><L,A>,
+     Unfolding: InlineRule (2, True, True)
+                (\ @ a (ds :: a) (ds1 :: GHC.Types.Bool) -> GHC.Types.False) -}
+12ce7cf27752870d0b411528edf3dbcd
+  $fFoldableRBTree9 :: a
+  {- Strictness: x -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$celem ::
+    GHC.Classes.Eq a => a -> RBT.RBTree a -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,1*U(1*C1(C(U)),A)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                RBT.$fFoldableRBTree5
+                  `cast`
+                (forall (a :: <*>_N).
+                 <GHC.Classes.Eq a>_R
+                 ->_R <a>_R
+                 ->_R <RBT.RBTree a>_R
+                 ->_R Data.Monoid.N:Any[0]) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfold :: GHC.Base.Monoid m => RBT.RBTree m -> m
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U(U,C(C1(U)),A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ m ($dMonoid :: GHC.Base.Monoid m) (eta :: RBT.RBTree m) ->
+                 RBT.$fFoldableRBTree_$cfoldMap
+                   @ m
+                   @ m
+                   $dMonoid
+                   (GHC.Base.id @ m)
+                   eta) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfoldMap ::
+    GHC.Base.Monoid m => (a -> m) -> RBT.RBTree a -> m
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <S,U(U,C(C1(U)),A)><L,C(U)><S,1*U> -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfoldl :: (b -> a -> b) -> b -> RBT.RBTree a -> b
+  {- Arity: 3, Strictness: <L,C(C1(U))><L,U><S,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ b @ a (f :: b -> a -> b) (z :: b) (t1 :: RBT.RBTree a) ->
+                 (RBT.$fFoldableRBTree_$cfoldMap
+                    @ (Data.Monoid.Dual (Data.Monoid.Endo b))
+                    @ a
+                    (RBT.$fFoldableRBTree10 @ b)
+                    (\ (x :: a) (eta :: b) -> f eta x)
+                      `cast`
+                    (<a>_R
+                     ->_R Sym (Data.Monoid.N:Dual[0] (Data.Monoid.N:Endo[0] <b>_R)))
+                    t1)
+                   `cast`
+                 (Data.Monoid.N:Dual[0] (Data.Monoid.N:Endo[0] <b>_R))
+                   z) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfoldl' ::
+    (b -> a -> b) -> b -> RBT.RBTree a -> b
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,C(C1(U))><L,U><S,1*U>,
+     Unfolding: (\ @ b
+                   @ a
+                   (f :: b -> a -> b)
+                   (z0 :: b)
+                   (xs :: RBT.RBTree a) ->
+                 (RBT.$fFoldableRBTree_$cfoldMap
+                    @ (Data.Monoid.Endo (b -> b))
+                    @ a
+                    (Data.Monoid.$fMonoidEndo @ (b -> b))
+                    (\ (x :: a) (k :: b -> b) (z :: b) ->
+                     case f z x of vx { DEFAULT -> k vx })
+                      `cast`
+                    (<a>_R ->_R Sym (Data.Monoid.N:Endo[0] <b -> b>_R))
+                    xs)
+                   `cast`
+                 (Data.Monoid.N:Endo[0] <b -> b>_R)
+                   (GHC.Base.id @ b)
+                   z0) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfoldl1 :: (a -> a -> a) -> RBT.RBTree a -> a
+  {- Arity: 2, Strictness: <L,C(C1(U))><S,1*U>,
+     Unfolding: (\ @ a (f :: a -> a -> a) (xs :: RBT.RBTree a) ->
+                 case (RBT.$fFoldableRBTree_$cfoldMap
+                         @ (Data.Monoid.Dual (Data.Monoid.Endo (GHC.Base.Maybe a)))
+                         @ a
+                         (RBT.$fFoldableRBTree10 @ (GHC.Base.Maybe a))
+                         (\ (x :: a) (eta :: GHC.Base.Maybe a) ->
+                          GHC.Base.Just
+                            @ a
+                            (case eta of wild {
+                               GHC.Base.Nothing -> x GHC.Base.Just x1 -> f x1 x }))
+                           `cast`
+                         (<a>_R
+                          ->_R Sym (Data.Monoid.N:Dual[0]
+                                        (Data.Monoid.N:Endo[0] <GHC.Base.Maybe a>_R)))
+                         xs)
+                        `cast`
+                      (Data.Monoid.N:Dual[0]
+                           (Data.Monoid.N:Endo[0] <GHC.Base.Maybe a>_R))
+                        (GHC.Base.Nothing @ a) of wild {
+                   GHC.Base.Nothing -> RBT.$fFoldableRBTree9 @ a
+                   GHC.Base.Just v -> v }) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfoldr :: (a -> b -> b) -> b -> RBT.RBTree a -> b
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,C(U)><L,U><S,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a @ b (f :: a -> b -> b) (z :: b) (t1 :: RBT.RBTree a) ->
+                 (RBT.$fFoldableRBTree_$cfoldMap
+                    @ (Data.Monoid.Endo b)
+                    @ a
+                    (Data.Monoid.$fMonoidEndo @ b)
+                    f `cast` (<a>_R ->_R Sym (Data.Monoid.N:Endo[0] <b>_R))
+                    t1)
+                   `cast`
+                 (Data.Monoid.N:Endo[0] <b>_R)
+                   z) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfoldr' ::
+    (a -> b -> b) -> b -> RBT.RBTree a -> b
+  {- Arity: 3, Strictness: <L,C(C1(U))><L,U><S,1*U>,
+     Unfolding: (\ @ a
+                   @ b
+                   (f :: a -> b -> b)
+                   (z0 :: b)
+                   (xs :: RBT.RBTree a) ->
+                 (RBT.$fFoldableRBTree_$cfoldMap
+                    @ (Data.Monoid.Dual (Data.Monoid.Endo (b -> b)))
+                    @ a
+                    (RBT.$fFoldableRBTree10 @ (b -> b))
+                    (\ (x :: a) (eta :: b -> b) (z :: b) ->
+                     case f x z of vx { DEFAULT -> eta vx })
+                      `cast`
+                    (<a>_R
+                     ->_R Sym (Data.Monoid.N:Dual[0]
+                                   (Data.Monoid.N:Endo[0] <b -> b>_R)))
+                    xs)
+                   `cast`
+                 (Data.Monoid.N:Dual[0] (Data.Monoid.N:Endo[0] <b -> b>_R))
+                   (GHC.Base.id @ b)
+                   z0) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cfoldr1 :: (a -> a -> a) -> RBT.RBTree a -> a
+  {- Arity: 2, Strictness: <L,C(C1(U))><S,1*U>,
+     Unfolding: (\ @ a (f :: a -> a -> a) (xs :: RBT.RBTree a) ->
+                 case (RBT.$fFoldableRBTree_$cfoldMap
+                         @ (Data.Monoid.Endo (GHC.Base.Maybe a))
+                         @ a
+                         (Data.Monoid.$fMonoidEndo @ (GHC.Base.Maybe a))
+                         (\ (x :: a) (m :: GHC.Base.Maybe a) ->
+                          GHC.Base.Just
+                            @ a
+                            (case m of wild {
+                               GHC.Base.Nothing -> x GHC.Base.Just y -> f x y }))
+                           `cast`
+                         (<a>_R ->_R Sym (Data.Monoid.N:Endo[0] <GHC.Base.Maybe a>_R))
+                         xs)
+                        `cast`
+                      (Data.Monoid.N:Endo[0] <GHC.Base.Maybe a>_R)
+                        (GHC.Base.Nothing @ a) of wild {
+                   GHC.Base.Nothing -> RBT.$fFoldableRBTree11 @ a
+                   GHC.Base.Just v -> v }) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$clength :: RBT.RBTree a -> GHC.Types.Int
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: (\ @ a (xs :: RBT.RBTree a) ->
+                 (RBT.$fFoldableRBTree_$cfoldMap
+                    @ (Data.Monoid.Endo (GHC.Types.Int -> GHC.Types.Int))
+                    @ a
+                    (Data.Monoid.$fMonoidEndo @ (GHC.Types.Int -> GHC.Types.Int))
+                    (RBT.$fFoldableRBTree7 @ a)
+                      `cast`
+                    (<a>_R
+                     ->_R Sym (Data.Monoid.N:Endo[0]
+                                   <GHC.Types.Int -> GHC.Types.Int>_R))
+                    xs)
+                   `cast`
+                 (Data.Monoid.N:Endo[0] <GHC.Types.Int -> GHC.Types.Int>_R)
+                   (GHC.Base.id @ GHC.Types.Int)
+                   RBT.$fFoldableRBTree6) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cmaximum ::
+    GHC.Classes.Ord a => RBT.RBTree a -> a
+  {- Arity: 1, Strictness: <L,U(A,A,A,A,A,C(C1(U)),A,A)>,
+     Unfolding: (\ @ a ($dOrd :: GHC.Classes.Ord a) ->
+                 let {
+                   g :: GHC.Base.Monoid (Data.Foldable.Max a)
+                   = Data.Foldable.$fMonoidMax @ a $dOrd
+                 } in
+                 \ (x :: RBT.RBTree a) ->
+                 case (RBT.$fFoldableRBTree_$cfoldMap
+                         @ (Data.Foldable.Max a)
+                         @ a
+                         g
+                         (GHC.Base.Just @ a)
+                           `cast`
+                         (<a>_R ->_R Sym (Data.Foldable.N:Max[0]) <a>_N)
+                         x)
+                        `cast`
+                      (Data.Foldable.N:Max[0] <a>_N) of wild {
+                   GHC.Base.Nothing -> RBT.$fFoldableRBTree4 @ a
+                   GHC.Base.Just v -> v }) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cminimum ::
+    GHC.Classes.Ord a => RBT.RBTree a -> a
+  {- Arity: 1, Strictness: <L,U(A,A,A,C(C1(U)),A,A,A,A)>,
+     Unfolding: (\ @ a ($dOrd :: GHC.Classes.Ord a) ->
+                 let {
+                   g :: GHC.Base.Monoid (Data.Foldable.Min a)
+                   = Data.Foldable.$fMonoidMin @ a $dOrd
+                 } in
+                 \ (x :: RBT.RBTree a) ->
+                 case (RBT.$fFoldableRBTree_$cfoldMap
+                         @ (Data.Foldable.Min a)
+                         @ a
+                         g
+                         (GHC.Base.Just @ a)
+                           `cast`
+                         (<a>_R ->_R Sym (Data.Foldable.N:Min[0]) <a>_N)
+                         x)
+                        `cast`
+                      (Data.Foldable.N:Min[0] <a>_N) of wild {
+                   GHC.Base.Nothing -> RBT.$fFoldableRBTree3 @ a
+                   GHC.Base.Just v -> v }) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cnull :: RBT.RBTree a -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a (t1 :: RBT.RBTree a) ->
+                 (RBT.$fFoldableRBTree_$cfoldMap
+                    @ (Data.Monoid.Endo GHC.Types.Bool)
+                    @ a
+                    (Data.Monoid.$fMonoidEndo @ GHC.Types.Bool)
+                    (RBT.$fFoldableRBTree8 @ a)
+                      `cast`
+                    (<a>_R ->_R Sym (Data.Monoid.N:Endo[0] <GHC.Types.Bool>_R))
+                    t1)
+                   `cast`
+                 (Data.Monoid.N:Endo[0] <GHC.Types.Bool>_R)
+                   GHC.Types.True) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$cproduct :: GHC.Num.Num a => RBT.RBTree a -> a
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(A,A,U,A,A,A,C(U))>,
+     Unfolding: InlineRule (0, True, True)
+                RBT.$fFoldableRBTree1
+                  `cast`
+                (forall (a :: <*>_N).
+                 <GHC.Num.Num a>_R
+                 ->_R <RBT.RBTree a>_R
+                 ->_R Data.Monoid.N:Product[0] <a>_R) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$csum :: GHC.Num.Num a => RBT.RBTree a -> a
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(U,A,A,A,A,A,C(U))>,
+     Unfolding: InlineRule (0, True, True)
+                RBT.$fFoldableRBTree2
+                  `cast`
+                (forall (a :: <*>_N).
+                 <GHC.Num.Num a>_R
+                 ->_R <RBT.RBTree a>_R
+                 ->_R Data.Monoid.N:Sum[0] <a>_R) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFoldableRBTree_$ctoList :: RBT.RBTree a -> [a]
+  {- Arity: 1, Strictness: <L,U>, Inline: INLINE (sat-args=1),
+     Unfolding: InlineRule (1, False, False)
+                (\ @ a (t1 :: RBT.RBTree a) ->
+                 GHC.Base.build
+                   @ a
+                   (\ @ b (c :: a -> b -> b)[OneShot] (n :: b)[OneShot] ->
+                    RBT.$fFoldableRBTree_$cfoldr @ a @ b c n t1)) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFunctorRBTree :: GHC.Base.Functor RBT.RBTree
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ RBT.RBTree RBT.$fFunctorRBTree_$cfmap RBT.$fFunctorRBTree_$c<$ -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFunctorRBTree_$c<$ :: a -> RBT.RBTree b -> RBT.RBTree a
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a @ b (eta :: a) (eta1 :: RBT.RBTree b) ->
+                 RBT.$fFunctorRBTree_$cfmap @ b @ a (\ (ds :: b) -> eta) eta1) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fFunctorRBTree_$cfmap :: (a -> b) -> RBT.RBTree a -> RBT.RBTree b
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,C(U)><S,1*U> -}
+94b97d557da590ac1de8252ea49eeedc
+  $fShowColor :: GHC.Show.Show RBT.Color
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ RBT.Color
+                  RBT.$fShowColor_$cshowsPrec
+                  RBT.$fShowColor_$cshow
+                  RBT.$fShowColor_$cshowList -}
+94b97d557da590ac1de8252ea49eeedc
+  $fShowColor1 :: RBT.Color -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ds :: RBT.Color) (eta :: GHC.Base.String) ->
+                 case ds of wild {
+                   RBT.Red
+                   -> GHC.Base.augment
+                        @ GHC.Types.Char
+                        (\ @ b
+                           (c :: GHC.Types.Char -> b -> b)[OneShot]
+                           (n :: b)[OneShot] ->
+                         GHC.Base.foldr @ GHC.Types.Char @ b c n RBT.$fShowColor3)
+                        eta
+                   RBT.Black
+                   -> GHC.Base.augment
+                        @ GHC.Types.Char
+                        (\ @ b
+                           (c :: GHC.Types.Char -> b -> b)[OneShot]
+                           (n :: b)[OneShot] ->
+                         GHC.Base.foldr @ GHC.Types.Char @ b c n RBT.$fShowColor2)
+                        eta }) -}
+603b608c3146a0615ccc98d89ecfc067
+  $fShowColor2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Black"#) -}
+d75996a41641bc5431055f5383b11cc8
+  $fShowColor3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Red"#) -}
+94b97d557da590ac1de8252ea49eeedc
+  $fShowColor_$cshow :: RBT.Color -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: RBT.Color) ->
+                 case x of wild {
+                   RBT.Red -> RBT.$fShowColor3 RBT.Black -> RBT.$fShowColor2 }) -}
+94b97d557da590ac1de8252ea49eeedc
+  $fShowColor_$cshowList :: [RBT.Color] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ RBT.Color RBT.$fShowColor1) -}
+94b97d557da590ac1de8252ea49eeedc
+  $fShowColor_$cshowsPrec ::
+    GHC.Types.Int -> RBT.Color -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,A><S,1*U><L,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ (ds :: GHC.Types.Int)
+                   (ds1 :: RBT.Color)
+                   (eta :: GHC.Base.String) ->
+                 case ds1 of wild {
+                   RBT.Red
+                   -> GHC.Base.augment
+                        @ GHC.Types.Char
+                        (\ @ b
+                           (c :: GHC.Types.Char -> b -> b)[OneShot]
+                           (n :: b)[OneShot] ->
+                         GHC.Base.foldr @ GHC.Types.Char @ b c n RBT.$fShowColor3)
+                        eta
+                   RBT.Black
+                   -> GHC.Base.augment
+                        @ GHC.Types.Char
+                        (\ @ b
+                           (c :: GHC.Types.Char -> b -> b)[OneShot]
+                           (n :: b)[OneShot] ->
+                         GHC.Base.foldr @ GHC.Types.Char @ b c n RBT.$fShowColor2)
+                        eta }) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fShowRBTree :: GHC.Show.Show a => GHC.Show.Show (RBT.RBTree a)
+  DFunId
+  {- Arity: 1, Strictness: <L,U(C(C1(U)),A,A)>m,
+     Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun: @ a ($dShow :: GHC.Show.Show a).
+                  @ (RBT.RBTree a)
+                  (RBT.$fShowRBTree_$cshowsPrec @ a $dShow)
+                  (RBT.$fShowRBTree_$cshow @ a $dShow)
+                  (RBT.$fShowRBTree_$cshowList @ a $dShow) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fShowRBTree_$cshow ::
+    GHC.Show.Show a => RBT.RBTree a -> GHC.Base.String
+  {- Arity: 2, Strictness: <L,U(C(C1(U)),A,A)><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a ($dShow :: GHC.Show.Show a) (x :: RBT.RBTree a) ->
+                 RBT.$fShowRBTree_$cshowsPrec
+                   @ a
+                   $dShow
+                   GHC.Show.shows22
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fShowRBTree_$cshowList ::
+    GHC.Show.Show a => [RBT.RBTree a] -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,U(C(C1(U)),A,A)><S,1*U><L,U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   ($dShow :: GHC.Show.Show a)
+                   (eta :: [RBT.RBTree a])
+                   (eta1 :: GHC.Base.String) ->
+                 GHC.Show.showList__
+                   @ (RBT.RBTree a)
+                   (RBT.$fShowRBTree_$cshowsPrec @ a $dShow RBT.$fFoldableRBTree6)
+                   eta
+                   eta1) -}
+e744d26a9a5e91cb5120e15392f133b5
+  $fShowRBTree_$cshowsPrec ::
+    GHC.Show.Show a => GHC.Types.Int -> RBT.RBTree a -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,U(C(C1(U)),A,A)><L,1*U(U)><S,1*U> -}
+0acce69bce2f2d7a009bccf660e3fe3e
+  $tc'Black :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   15063640390072075235##
+                   10892068434670307757##
+                   RBT.$trModule
+                   RBT.$tc'Black1) -}
+7f5ce020d5b7e93e294175d2718a0903
+  $tc'Black1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Black"#) -}
+6a3c939e2d09b2ae0a292a4952374292
+  $tc'Empty :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   16981365248985553749##
+                   4198249272592664206##
+                   RBT.$trModule
+                   RBT.$tc'Empty1) -}
+550bab84efd13b1e220bb61e25926408
+  $tc'Empty1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Empty"#) -}
+9b9e9f9a277ad37b1b308b3475f3e2d1
+  $tc'Node :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   15272188099840718147##
+                   12547049429358640757##
+                   RBT.$trModule
+                   RBT.$tc'Node1) -}
+50801dcbb3118e8c305e5f7d7c7ceb22
+  $tc'Node1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Node"#) -}
+3db8fb7312056819a7e9e383386d8966
+  $tc'Red :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   3717401561214858458##
+                   18239237054752053036##
+                   RBT.$trModule
+                   RBT.$tc'Red1) -}
+b5357c419ffd1d494e6c6fd6363b4c06
+  $tc'Red1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Red"#) -}
+2c23265e6323ac91dbff1d7a17efc41b
+  $tcColor :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   10179617002169791986##
+                   14683803442492832758##
+                   RBT.$trModule
+                   RBT.$tcColor1) -}
+f054fab4758173197ec51cf3b32fed68
+  $tcColor1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Color"#) -}
+acfbbb30bdc68ca00646f5be00314293
+  $tcRBTree :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   7764245192088400090##
+                   2836868792889991985##
+                   RBT.$trModule
+                   RBT.$tcRBTree1) -}
+1aa92afb70ccfae4928df44d0870ebe5
+  $tcRBTree1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "RBTree"#) -}
+a385b6b3cc34ac0dd15f5cf4fecaa804
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module RBT.$trModule2 RBT.$trModule1) -}
+ecdf0376921df02c074583a77654694d
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "RBT"#) -}
+9d12fa215caf01381de590de3fff0205
+  $trModule2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS
+                   "librbt-0.1.0.0-1b5tNFuxx0AK0yhfPuFreI"#) -}
+6cc0852cf2c75223166b4c266f5395be
+  $winsert ::
+    GHC.Classes.Ord a =>
+    a -> RBT.RBTree a -> (# RBT.Color, a, RBT.RBTree a, RBT.RBTree a #)
+  {- Arity: 3,
+     Strictness: <L,U(1*U,A,A,A,C(C1(U)),A,A,A)><L,U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ @ a
+                   (w :: GHC.Classes.Ord a)
+                   (w1 :: a)
+                   (w2 :: RBT.RBTree a) ->
+                 let {
+                   ds :: (a, RBT.RBTree a, RBT.RBTree a)
+                   = let {
+                       $dEq :: GHC.Classes.Eq a = GHC.Classes.$p1Ord @ a w
+                     } in
+                     letrec {
+                       _insert :: a -> RBT.RBTree a -> RBT.RBTree a
+                         {- Arity: 2, Strictness: <L,U><S,1*U> -}
+                       = \ (x :: a) (ds1 :: RBT.RBTree a) ->
+                         case ds1 of wild {
+                           RBT.Empty -> RBT.Node @ a RBT.Red x (RBT.Empty @ a) (RBT.Empty @ a)
+                           RBT.Node ds2 y left right
+                           -> case ds2 of wild1 {
+                                RBT.Red
+                                -> case GHC.Classes.== @ a $dEq x y of wild2 {
+                                     GHC.Types.False
+                                     -> case GHC.Classes.> @ a w x y of wild3 {
+                                          GHC.Types.False
+                                          -> RBT.Node @ a RBT.Red y (_insert x left) right
+                                          GHC.Types.True
+                                          -> RBT.Node @ a RBT.Red y left (_insert x right) }
+                                     GHC.Types.True -> RBT.Node @ a RBT.Red x left right }
+                                RBT.Black
+                                -> case GHC.Classes.== @ a $dEq x y of wild2 {
+                                     GHC.Types.False
+                                     -> case GHC.Classes.> @ a w x y of wild3 {
+                                          GHC.Types.False
+                                          -> RBT.balance @ a y (_insert x left) right
+                                          GHC.Types.True
+                                          -> RBT.balance @ a y left (_insert x right) }
+                                     GHC.Types.True -> RBT.Node @ a RBT.Black x left right } } }
+                     } in
+                     case _insert w1 w2 of wild {
+                       RBT.Empty -> RBT.fromList1 @ a RBT.Node ds1 b l r -> (b, l, r) }
+                 } in
+                 (# RBT.Black, case ds of ds1 { (,,) b l r -> b },
+                    case ds of ds1 { (,,) b l r -> l },
+                    case ds of ds1 { (,,) b l r -> r } #)) -}
+94b97d557da590ac1de8252ea49eeedc
+  data Color = Red | Black
+e744d26a9a5e91cb5120e15392f133b5
+  data RBTree a
+    = Empty | Node RBT.Color a (RBT.RBTree a) (RBT.RBTree a)
+56143cbb799671d85a1d8ac467a0513b
+  balance :: a -> RBT.RBTree a -> RBT.RBTree a -> RBT.RBTree a
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><S,U><S,U> -}
+3d2ca428fabaf1e663372bba23352013
+  empty :: RBT.RBTree a
+  {- HasNoCafRefs, Unfolding: InlineRule (0, True, True) RBT.Empty -}
+5a94c8a1da75ab50eaa2699a85291a91
+  fromList :: GHC.Classes.Ord a => [a] -> RBT.RBTree a
+  {- Arity: 2, Strictness: <L,U(U,A,A,A,C(C1(U)),A,A,A)><S,1*U>,
+     Unfolding: (\ @ a ($dOrd :: GHC.Classes.Ord a) (eta :: [a]) ->
+                 letrec {
+                   go :: [a] -> RBT.RBTree a {- Arity: 1, Strictness: <S,1*U> -}
+                   = \ (ds :: [a]) ->
+                     case ds of wild {
+                       [] -> RBT.Empty @ a
+                       : y ys
+                       -> case RBT.$winsert
+                                 @ a
+                                 $dOrd
+                                 y
+                                 (go ys) of ww { (#,,,#) ww1 ww2 ww3 ww4 ->
+                          RBT.Node @ a ww1 ww2 ww3 ww4 } }
+                 } in
+                 go eta) -}
+9092c7ebb3741fbd1c70e052c08794df
+  fromList1 :: (a, RBT.RBTree a, RBT.RBTree a)
+  {- Strictness: x -}
+55739e7990be25347daa957724cb5e64
+  insert :: GHC.Classes.Ord a => a -> RBT.RBTree a -> RBT.RBTree a
+  {- Arity: 3,
+     Strictness: <L,U(1*U,A,A,A,C(C1(U)),A,A,A)><L,U><L,1*U>m2,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a (w :: GHC.Classes.Ord a) (w1 :: a) (w2 :: RBT.RBTree a) ->
+                 case RBT.$winsert @ a w w1 w2 of ww { (#,,,#) ww1 ww2 ww3 ww4 ->
+                 RBT.Node @ a ww1 ww2 ww3 ww4 }) -}
+de6c46e0a8684d943031f8ef3dbde371
+  max :: RBT.RBTree a -> GHC.Base.Maybe a
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+22b4340a46b6dae62c9e4a5dfca31e4d
+  min :: RBT.RBTree a -> GHC.Base.Maybe a
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+ff5e2257337f3c43e4a47c121f62128d
+  null :: RBT.RBTree a -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a (ds :: RBT.RBTree a) ->
+                 case ds of wild {
+                   RBT.Empty -> GHC.Types.True
+                   RBT.Node ipv ipv1 ipv2 ipv3 -> GHC.Types.False }) -}
+ab233c9b4fe5ef56f4446ceb777d7928
+  remove :: GHC.Classes.Ord a => a -> RBT.RBTree a -> RBT.RBTree a
+  {- Arity: 3,
+     Strictness: <L,U(U(U,U),C(C1(U)),A,C(C1(U)),A,A,A,A)><L,U><S,1*U> -}
+ecfeab77a5f5ddad4be5919ad7a987f5
+  root :: RBT.RBTree a -> GHC.Base.Maybe a
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a (ds :: RBT.RBTree a) ->
+                 case ds of wild {
+                   RBT.Empty -> GHC.Base.Nothing @ a
+                   RBT.Node ds1 x ds2 ds3 -> GHC.Base.Just @ a x }) -}
+324cd0a2a41f0bcdf235efd56323d041
+  search ::
+    GHC.Classes.Ord a => a -> RBT.RBTree a -> GHC.Base.Maybe a
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,U(U(C(C1(U)),A),A,C(C1(U)),A,A,A,A,A)><L,U><S,1*U> -}
+289a5361fc768eeaf161e38ce13c877b
+  singleton :: a -> RBT.RBTree a
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m2,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a (x :: a) ->
+                 RBT.Node @ a RBT.Black x (RBT.Empty @ a) (RBT.Empty @ a)) -}
+f174e8fa6812994b097040806b164ae9
+  toList :: RBT.RBTree a -> [a]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ @ a (t1 :: RBT.RBTree a) ->
+                 (RBT.$fFoldableRBTree_$cfoldMap
+                    @ (Data.Monoid.Endo [a])
+                    @ a
+                    (Data.Monoid.$fMonoidEndo @ [a])
+                    (GHC.Types.: @ a)
+                      `cast`
+                    (<a>_R ->_R Sym (Data.Monoid.N:Endo[0] <[a]>_R))
+                    t1)
+                   `cast`
+                 (Data.Monoid.N:Endo[0] <[a]>_R)
+                   (GHC.Types.[] @ a)) -}
+instance [safe] GHC.Classes.Eq [RBT.Color] = RBT.$fEqColor
+instance [safe] GHC.Classes.Eq [RBT.RBTree] = RBT.$fEqRBTree
+instance [safe] Data.Foldable.Foldable [RBT.RBTree]
+  = RBT.$fFoldableRBTree
+instance [safe] GHC.Base.Functor [RBT.RBTree] = RBT.$fFunctorRBTree
+instance [safe] GHC.Show.Show [RBT.Color] = RBT.$fShowColor
+instance [safe] GHC.Show.Show [RBT.RBTree] = RBT.$fShowRBTree
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

@@ -8,7 +8,8 @@ Stability   : experimental
 
 Implementation of RBT data struct
 -}
-module RBT (RBTree,
+module RBT (RBTree(..),
+            Color(..),
             RBT.null,
             empty,
             singleton,
@@ -17,7 +18,10 @@ module RBT (RBTree,
             RBT.max,
             search,
             insert,
-            remove,
+            remove,,
+            member,
+            isBlack,
+            isRed,
             fromList,
             toList) where
 
