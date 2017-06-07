@@ -6,29 +6,7 @@ import Test.QuickCheck
 import Test.HUnit hiding (Test)
 import Test.Framework.Providers.QuickCheck2 (testProperty)
 
--- import Map
 import RBT
-
-
---prop_singleton = (Map.get 1 $ (Map.singleton 1 2)) == Just 2
-
---prop_get = (Map.get 1 $ Map.singleton 1 2) == Just 2
-
---prop_null = (Map.null $ Map.singleton 1 2) == False
-
---prop_empty = Map.null Map.empty == True
-
---prop_put = (Map.get 3 $ Map.put 3 4 $ Map.singleton 1 2) == Just 4
-
---prop_delete = (Map.get 3 $ Map.delete 3 $ Map.singleton 3 4) == Nothing
-
---prop_from_list = (Map.get 1 $ Map.fromList [(1,2)]) == Just 2
-
---prop_to_list = (Map.toList $ Map.put 3 4 $ Map.singleton 1 2) == [(1,2), (3,4)]
-
---return []
---runQuickCheckTests = $quickCheckAll
-
 
 
 main :: IO ()
@@ -70,5 +48,35 @@ testModifyTreeSuite = testGroup "Testing function that modify tree like insertio
     [testCase "Testing insertion" (
         assertEqual "Should add new element to tree" (Node Black 1 Empty (Node Red 3 Empty Empty)) (insert 3 $ singleton 1)),
     testCase "Testing basic deletion" (
-        assertEqual "Should remove element from tree" (Node Black 1 Empty (Node Red 3 Empty Empty)) (remove 2 $ insert 3 $ insert 2 $ singleton 1))]
+        assertEqual "Should remoe element from tree" (Node Black 1 Empty (Node Red 3 Empty Empty)) (remove 2 $ insert 3 $ insert 2 $ singleton 1)),
+    testProperty "Testing sequence inserting" (
+        forAll (arbitrary ::  Gen (RBTree Int)) (\t -> isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t))]
 
+
+-- helper functions
+
+
+instance (Ord a, Arbitrary a) => Arbitrary (RBTree a) where
+    arbitrary = arbitrary >>= return . fromList
+
+
+isRootBlack :: RBTree a -> Bool
+isRootBlack Empty              = True
+isRootBlack (Node Black _ _ _) = True
+isRootBlack _                  = False
+
+
+haveRedNodesBlackSons :: RBTree a -> Bool
+haveRedNodesBlackSons Empty              = True
+haveRedNodesBlackSons (Node Black _ l r) = haveRedNodesBlackSons l && haveRedNodesBlackSons r
+haveRedNodesBlackSons (Node Red _ l r)
+    | isBlack l && isBlack r = haveRedNodesBlackSons l && haveRedNodesBlackSons r
+    | otherwise              = False
+
+
+areBlackPathsEquals :: RBTree a -> Bool
+areBlackPathsEquals x = let (a, b) = _checkPaths x in b
+    where _checkPaths Empty = (1, True)
+          _checkPaths (Node col _ l r) = let (a1, b1) = _checkPaths l
+                                             (a2, b2) = _checkPaths r
+                                         in (a1 + if col == Black then 1 else 0, b1 && b2 && (a1 == a2))
