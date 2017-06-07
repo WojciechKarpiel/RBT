@@ -52,7 +52,9 @@ testModifyTreeSuite = testGroup "Testing function that modify tree like insertio
     testProperty "Testing sequence inserting" (
         forAll (arbitrary ::  Gen (RBTree Int)) (\t -> isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t)),
     testProperty "Testing removal after sequence inserting" (
-        forAll (arbitrary ::  Gen (RBTree Int)) (\x -> let t = remove 0 x in isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t))]
+        forAll (arbitrary ::  Gen (RBTree Int)) (\x -> let t = remove 0 x in isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t)),
+    testProperty "Testing removal of element not present in tree" (
+        forAll (arbitrary ::  Gen (RBTree Int)) (\x -> let t = remove 10000 x in isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t))]
 
 
 
