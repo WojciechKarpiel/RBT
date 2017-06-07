@@ -32,8 +32,6 @@ import qualified Data.Traversable as T
 data Color = Red | Black deriving (Show, Eq)
 data RBTree a = Empty | Node Color a (RBTree a) (RBTree a) deriving (Eq, Show)
 
---instance Show a => Show (RBTree a) where
---    show = show . toList
 
 instance Functor RBTree where
     fmap _ Empty = Empty
@@ -139,9 +137,7 @@ balance a l r = Node Black a l r
 -- | Time complexity: O(log n)
 remove :: Ord a => a -> RBTree a -> RBTree a
 remove _ Empty = Empty
-remove x (Node Black y Empty Empty)
-    | x == y = Empty
-remove x t@(Node Black z zl zr) = let s = if (isBlack zl && isBlack zr)
+remove x t@(Node Black z zl zr) = let s = if isBlack zl && isBlack zr
                                               then Node Red z zl zr
                                               else t
                                   in case _remove x s False of

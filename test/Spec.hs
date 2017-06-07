@@ -49,12 +49,12 @@ testModifyTreeSuite = testGroup "Testing function that modify tree like insertio
         assertEqual "Should add new element to tree" (Node Black 1 Empty (Node Red 3 Empty Empty)) (insert 3 $ singleton 1)),
     testCase "Testing basic deletion" (
         assertEqual "Should remoe element from tree" (Node Black 1 Empty (Node Red 3 Empty Empty)) (remove 2 $ insert 3 $ insert 2 $ singleton 1)),
-    testProperty "Testing sequence inserting" (
+    testProperty "Testing inserting" (
         forAll (arbitrary ::  Gen (RBTree Int)) (\t -> isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t)),
-    testProperty "Testing removal after sequence inserting" (
-        forAll (arbitrary ::  Gen (RBTree Int)) (\x -> let t = remove 0 x in isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t)),
+    testProperty "Testing removal" (
+        forAll (arbitrary ::  Gen (RBTree Int)) (\x -> let t = remove mempty x in isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t)),
     testProperty "Testing removal of element not present in tree" (
-        forAll (arbitrary ::  Gen (RBTree Int)) (\x -> let t = remove 10000 x in isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t))]
+        forAll (arbitrary ::  Gen (RBTree Int)) (\t -> let {(Just m) = RBT.max t; t' = remove (m+1) t} in isRootBlack t' && haveRedNodesBlackSons t' && areBlackPathsEquals t'))]
 
 
 
@@ -66,7 +66,7 @@ instance Monoid Int where
 
 
 instance (Monoid a, Ord a, Arbitrary a) => Arbitrary (RBTree a) where
-    arbitrary = arbitrary >>= return . insert mempty . fromList
+    arbitrary = (arbitrary :: Arbitrary a => Gen [a]) >>= return . foldr insert (singleton mempty)
 
 
 isRootBlack :: RBTree a -> Bool

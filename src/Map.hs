@@ -36,9 +36,6 @@ instance Ord a => Ord (Pair a b) where
 
 newtype Map a b = Map (T.RBTree (Pair a b)) deriving (Eq, Show)
 
---instance (Show a, Show b) => Show (Map a b) where
---    show = show . toList
-
 
 -- | Time complexity: O(1)
 null :: Map a b -> Bool
