@@ -154,6 +154,10 @@ remove x t@(Node Black z zl zr) = let s = if (isBlack zl && isBlack zr)
               | a == b || d = (Node Black c Empty Empty, b)
               | a == c      = (Node Black b Empty Empty, a)
               | otherwise   = (t, a)
+          _remove a t@(Node Black b Empty (Node Red c Empty Empty)) d
+              | a == b || d = (Node Black c Empty Empty, b)
+              | a == c      = (Node Black b Empty Empty, a)
+              | otherwise   = (t, a)
           _remove a t@(Node _ b l r) d =
               let (Node col v vl vr) = case a <= b of
                                            True  -> pushRedToLeft t

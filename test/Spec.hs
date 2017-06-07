@@ -50,14 +50,21 @@ testModifyTreeSuite = testGroup "Testing function that modify tree like insertio
     testCase "Testing basic deletion" (
         assertEqual "Should remoe element from tree" (Node Black 1 Empty (Node Red 3 Empty Empty)) (remove 2 $ insert 3 $ insert 2 $ singleton 1)),
     testProperty "Testing sequence inserting" (
-        forAll (arbitrary ::  Gen (RBTree Int)) (\t -> isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t))]
+        forAll (arbitrary ::  Gen (RBTree Int)) (\t -> isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t)),
+    testProperty "Testing removal after sequence inserting" (
+        forAll (arbitrary ::  Gen (RBTree Int)) (\x -> let t = remove 0 x in isRootBlack t && haveRedNodesBlackSons t && areBlackPathsEquals t))]
+
 
 
 -- helper functions
 
+instance Monoid Int where
+    mempty = 0
+    a `mappend` b = a + b
 
-instance (Ord a, Arbitrary a) => Arbitrary (RBTree a) where
-    arbitrary = arbitrary >>= return . fromList
+
+instance (Monoid a, Ord a, Arbitrary a) => Arbitrary (RBTree a) where
+    arbitrary = arbitrary >>= return . insert mempty . fromList
 
 
 isRootBlack :: RBTree a -> Bool
